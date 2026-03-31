@@ -55,7 +55,7 @@ export default function AppLayout() {
         <div className="flex h-16 items-center justify-between px-6">
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 shadow-lg shadow-primary/20">
-              <span className="text-base font-extrabold text-white" style={{ fontFamily: 'Outfit, sans-serif' }}>$</span>
+              <span className="text-base font-extrabold text-white" style={{ fontFamily: 'Outfit, sans-serif' }}>₹</span>
             </div>
             <div className="flex flex-col leading-none">
               <span className="text-lg font-bold tracking-tight font-[Outfit] bg-gradient-to-r from-primary to-emerald-400 bg-clip-text text-transparent">

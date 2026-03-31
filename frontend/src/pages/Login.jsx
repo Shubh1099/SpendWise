@@ -32,7 +32,7 @@ export default function Login() {
           {/* Logo */}
           <div className="mb-8 flex flex-col items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 shadow-lg shadow-primary/20">
-              <span className="text-xl font-extrabold text-white" style={{ fontFamily: "Outfit, sans-serif" }}>$</span>
+              <span className="text-xl font-extrabold text-white" style={{ fontFamily: "Outfit, sans-serif" }}>₹</span>
             </div>
             <div className="text-center">
               <h1 className="text-2xl font-bold tracking-tight" style={{ fontFamily: "Outfit, sans-serif" }}>
