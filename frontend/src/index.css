@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Outfit:wght@600;700&display=swap");
+
+@theme {
+  --color-background: #0F1117;
+  --color-surface: #1A1D27;
+  --color-primary: #10B981;
+  --color-secondary: #F59E0B;
+  --color-danger: #EF4444;
+  --color-text-primary: #F1F5F9;
+  --color-text-muted: #94A3B8;
+  --color-border: #2D3348;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Smooth scrolling & touch improvements */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent horizontal overflow on mobile */
+#root {
+  overflow-x: hidden;
+}
