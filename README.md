@@ -86,18 +86,18 @@ The dev server starts at `http://localhost:5173`.
 
 The following categories are seeded on first run:
 
-| Category | Icon |
+| Category |
 |---|---|
-| Food | utensils |
-| Transport | car |
-| Shopping | shopping-bag |
-| Bills | file-text |
-| Entertainment | film |
-| Health | heart-pulse |
-| Education | book-open |
-| Other | more-horizontal |
-| Groceries | shopping-cart |
-| Subscriptions | repeat |
+| Food |
+| Transport |
+| Shopping |
+| Bills |
+| Entertainment |
+| Health |
+| Education |
+| Other |
+| Groceries |
+| Subscriptions |
 
 ## API Endpoints
 
