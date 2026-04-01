@@ -1,83 +1,42 @@
 services:
-  db:
-    image: postgres:16-alpine
-    container_name: expense-tracker-db
-    environment:
-      TZ: Asia/Kolkata
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASS}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - expense-tracker-network
-    restart: unless-stopped
-
   backend:
-    build: ./backend
+    build: ./expense-tracker-backend
     container_name: expense-tracker-backend
-    depends_on:
-      db:
-        condition: service_healthy
+    env_file: .env
     environment:
-      TZ: Asia/Kolkata
-      SPRING_PROFILES_ACTIVE: prod
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASS: ${DB_PASS}
-      JWT_SECRET: ${JWT_SECRET}
-      GEMINI_API_KEY: ${GEMINI_API_KEY}
-      MAIL_HOST: ${MAIL_HOST}
-      MAIL_PORT: ${MAIL_PORT}
-      MAIL_USERNAME: ${MAIL_USERNAME}
-      MAIL_PASSWORD: ${MAIL_PASSWORD}
-      AWS_S3_BUCKET: ${AWS_S3_BUCKET}
-      AWS_REGION: ${AWS_REGION}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-      OTP_EXPIRY: ${OTP_EXPIRY:-5}
-      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-your-bot-token}
-      TELEGRAM_BOT_USERNAME: ${TELEGRAM_BOT_USERNAME:-your_bot_username}
-      TELEGRAM_BOT_ENABLED: ${TELEGRAM_BOT_ENABLED:-false}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require
+      - SPRING_DATASOURCE_USERNAME=${DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASS}
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - "127.0.0.1:8080:8080"
     volumes:
       - uploads_data:/app/uploads
-    ports:
-      - "8080:8080"
+    restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit 1"]
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/actuator/health"]
       interval: 30s
       timeout: 10s
-      retries: 5
-      start_period: 40s
-    networks:
-      - expense-tracker-network
-    restart: unless-stopped
+      retries: 10
+      start_period: 90s
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./expense-tracker-ui
+      args:
+        - VITE_API_BASE_URL=/api
     container_name: expense-tracker-frontend
+    ports:
+      - "127.0.0.1:3000:80"
     depends_on:
       backend:
         condition: service_healthy
-    ports:
-      - "80:80"
-    networks:
-      - expense-tracker-network
     restart: unless-stopped
 
 volumes:
-  postgres_data:
   uploads_data:
 
-networks:
-  expense-tracker-network:
-    driver: bridge
+~
+~
+~
+~
