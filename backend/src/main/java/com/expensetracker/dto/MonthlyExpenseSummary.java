@@ -18,6 +18,7 @@ public class MonthlyExpenseSummary {
     private int month;
     private BigDecimal totalAmount;
     private int transactionCount;
+    private long botImportCount;
     private List<CategoryBreakdown> categoryBreakdown;
 
     @Data

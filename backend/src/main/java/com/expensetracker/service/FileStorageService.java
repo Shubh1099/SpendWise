@@ -6,6 +6,8 @@ public interface FileStorageService {
 
     String storeFile(MultipartFile file);
 
+    String storeFileFromBytes(byte[] data, String contentType, String extension);
+
     String generatePresignedUrl(String s3Key);
 
     void deleteFile(String s3Key);

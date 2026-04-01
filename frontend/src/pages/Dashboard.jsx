@@ -11,7 +11,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import { ChevronLeft, ChevronRight, Wallet, Receipt, Tag, Inbox } from "lucide-react";
+import { ChevronLeft, ChevronRight, Wallet, Receipt, Tag, Inbox, Send } from "lucide-react";
 import Card from "../components/Card";
 import Badge from "../components/Badge";
 import { getMonthlySummary, getTransactions } from "../api/transactionApi";
@@ -120,6 +120,7 @@ export default function Dashboard() {
   const breakdown = summary?.categoryBreakdown || [];
   const totalAmount = Number(summary?.totalAmount) || 0;
   const transactionCount = summary?.transactionCount || 0;
+  const botImportCount = summary?.botImportCount || 0;
 
   const topCategory = breakdown.length
     ? breakdown.reduce((max, c) => (Number(c.amount) > Number(max.amount) ? c : max), breakdown[0])
@@ -164,7 +165,8 @@ export default function Dashboard() {
       {/* Loading State */}
       {loading && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <SkeletonCard />
             <SkeletonCard />
             <SkeletonCard />
             <SkeletonCard />
@@ -190,7 +192,7 @@ export default function Dashboard() {
       {/* Stat Cards */}
       {!loading && !isEmpty && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             <Card>
               <div className="flex items-center gap-3 text-text-muted mb-2">
                 <Wallet size={18} />
@@ -223,6 +225,16 @@ export default function Dashboard() {
                     {topCategory.categoryName}
                   </>
                 ) : "—"}
+              </p>
+            </Card>
+
+            <Card>
+              <div className="flex items-center gap-3 text-text-muted mb-2">
+                <Send size={18} />
+                <span className="text-sm font-medium">Bot Imports</span>
+              </div>
+              <p className="font-[Outfit] text-3xl font-bold text-blue-400">
+                {botImportCount}
               </p>
             </Card>
           </div>

@@ -45,6 +45,9 @@ services:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       OTP_EXPIRY: ${OTP_EXPIRY:-5}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-your-bot-token}
+      TELEGRAM_BOT_USERNAME: ${TELEGRAM_BOT_USERNAME:-your_bot_username}
+      TELEGRAM_BOT_ENABLED: ${TELEGRAM_BOT_ENABLED:-false}
     volumes:
       - uploads_data:/app/uploads
     ports:

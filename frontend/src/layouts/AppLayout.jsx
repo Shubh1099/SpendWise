@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { LayoutDashboard, ArrowLeftRight, Tags, Menu, X } from "lucide-react";
+import { LayoutDashboard, ArrowLeftRight, Tags, Settings, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { getProfile } from "../api/userApi";
@@ -10,12 +10,14 @@ const navItems = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
   { to: "/transactions", label: "Transactions", icon: ArrowLeftRight },
   { to: "/categories", label: "Categories", icon: Tags },
+  { to: "/settings", label: "Settings", icon: Settings },
 ];
 
 const pageTitles = {
   "/": "Dashboard",
   "/transactions": "Transactions",
   "/categories": "Categories",
+  "/settings": "Settings",
 };
 
 export default function AppLayout() {

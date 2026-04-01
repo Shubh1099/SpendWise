@@ -25,5 +25,6 @@ public class TransactionResponse {
     private LocalDate transactionDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String source;
     private ReceiptResponse receipt;
 }

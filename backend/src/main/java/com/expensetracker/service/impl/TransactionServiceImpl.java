@@ -142,11 +142,15 @@ public class TransactionServiceImpl implements TransactionService {
                 })
                 .toList();
 
+        long botImportCount = transactionRepository.countByUserIdAndSourceAndYearAndMonth(
+                user.getId(), "TELEGRAM", resolvedYear, resolvedMonth);
+
         return MonthlyExpenseSummary.builder()
                 .year(resolvedYear)
                 .month(resolvedMonth)
                 .totalAmount(totalAmount)
                 .transactionCount(transactions.size())
+                .botImportCount(botImportCount)
                 .categoryBreakdown(breakdowns)
                 .build();
     }
@@ -230,7 +234,8 @@ public class TransactionServiceImpl implements TransactionService {
                 .categoryIcon(transaction.getCategory().getIcon())
                 .transactionDate(transaction.getTransactionDate())
                 .createdAt(transaction.getCreatedAt())
-                .updatedAt(transaction.getUpdatedAt());
+                .updatedAt(transaction.getUpdatedAt())
+                .source(transaction.getSource());
 
         if (transaction.getReceipt() != null) {
             Receipt r = transaction.getReceipt();

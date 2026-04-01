@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -29,4 +30,10 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
     List<Transaction> findByUserIdOrderByTransactionDateDesc(UUID userId);
 
     List<Transaction> findByCategoryIdAndUserId(UUID categoryId, UUID userId);
+
+    @Query("SELECT COUNT(t) FROM Transaction t WHERE t.user.id = :userId AND t.amount = :amount AND t.transactionDate = :date")
+    long countByUserIdAndAmountAndDate(@Param("userId") UUID userId, @Param("amount") BigDecimal amount, @Param("date") LocalDate date);
+
+    @Query("SELECT COUNT(t) FROM Transaction t WHERE t.user.id = :userId AND t.source = :source AND YEAR(t.transactionDate) = :year AND MONTH(t.transactionDate) = :month")
+    long countByUserIdAndSourceAndYearAndMonth(@Param("userId") UUID userId, @Param("source") String source, @Param("year") int year, @Param("month") int month);
 }

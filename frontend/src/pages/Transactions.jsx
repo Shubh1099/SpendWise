@@ -899,8 +899,14 @@ export default function Transactions() {
                 <span className="w-24 shrink-0 text-sm text-text-muted">
                   {formatDate(txn.transactionDate)}
                 </span>
-                <span className="flex-1 truncate text-sm text-text-primary">
+                <span className="flex-1 truncate text-sm text-text-primary flex items-center gap-2">
                   {txn.description}
+                  {txn.source === "TELEGRAM" && (
+                    <span className="inline-flex items-center rounded-full bg-blue-500/15 px-2 py-0.5 text-[10px] font-medium text-blue-400">Telegram</span>
+                  )}
+                  {txn.source === "RECEIPT" && (
+                    <span className="inline-flex items-center rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-medium text-amber-400">Receipt</span>
+                  )}
                 </span>
                 <span className="w-28">
                   <Badge variant="secondary">
@@ -979,7 +985,15 @@ export default function Transactions() {
           <Card key={txn.id} className="!p-4">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-text-primary">{txn.description}</p>
+                <p className="truncate text-sm font-medium text-text-primary flex items-center gap-2">
+                  {txn.description}
+                  {txn.source === "TELEGRAM" && (
+                    <span className="inline-flex items-center rounded-full bg-blue-500/15 px-2 py-0.5 text-[10px] font-medium text-blue-400">Telegram</span>
+                  )}
+                  {txn.source === "RECEIPT" && (
+                    <span className="inline-flex items-center rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-medium text-amber-400">Receipt</span>
+                  )}
+                </p>
                 <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-text-muted">
                   <span>{formatDate(txn.transactionDate)}</span>
                   <span className="text-border">·</span>

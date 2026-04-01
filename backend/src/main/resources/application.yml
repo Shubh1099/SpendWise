@@ -54,5 +54,11 @@ gemini:
 otp:
   expiry-minutes: ${OTP_EXPIRY}
 
+telegram:
+  bot:
+    token: ${TELEGRAM_BOT_TOKEN:your-bot-token}
+    username: ${TELEGRAM_BOT_USERNAME:your_bot_username}
+    enabled: ${TELEGRAM_BOT_ENABLED:false}
+
 server:
   port: 8080

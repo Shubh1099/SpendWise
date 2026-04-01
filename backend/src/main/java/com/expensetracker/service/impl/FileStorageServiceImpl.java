@@ -94,6 +94,29 @@ public class FileStorageServiceImpl implements FileStorageService {
     }
 
     @Override
+    public String storeFileFromBytes(byte[] data, String contentType, String extension) {
+        if (data == null || data.length == 0) {
+            throw new BadRequestException("Cannot upload empty file");
+        }
+
+        String s3Key = "receipts/" + UUID.randomUUID() + extension;
+
+        try {
+            PutObjectRequest putRequest = PutObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(s3Key)
+                    .contentType(contentType)
+                    .build();
+
+            s3Client.putObject(putRequest, RequestBody.fromBytes(data));
+        } catch (S3Exception e) {
+            throw new FileStorageException("Failed to upload file to S3", e);
+        }
+
+        return s3Key;
+    }
+
+    @Override
     public String generatePresignedUrl(String s3Key) {
         try {
             GetObjectRequest getRequest = GetObjectRequest.builder()

@@ -60,6 +60,7 @@ public class SmartTransactionService {
                 .category(category)
                 .user(user)
                 .transactionDate(scanResult.getExtractedDate())
+                .source("RECEIPT")
                 .build();
 
         transaction = transactionRepository.save(transaction);
@@ -86,6 +87,7 @@ public class SmartTransactionService {
                 .transactionDate(transaction.getTransactionDate())
                 .createdAt(transaction.getCreatedAt())
                 .updatedAt(transaction.getUpdatedAt())
+                .source(transaction.getSource())
                 .receipt(ReceiptResponse.builder()
                         .id(receipt.getId())
                         .transactionId(transaction.getId())
