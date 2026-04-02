@@ -1,6 +1,6 @@
 services:
   backend:
-    build: ./expense-tracker-backend
+    build: ./backend
     container_name: expense-tracker-backend
     env_file: .env
     environment:
@@ -22,7 +22,7 @@ services:
 
   frontend:
     build:
-      context: ./expense-tracker-ui
+      context: ./frontend
       args:
         - VITE_API_BASE_URL=/api
     container_name: expense-tracker-frontend
@@ -35,8 +35,3 @@ services:
 
 volumes:
   uploads_data:
-
-~
-~
-~
-~
